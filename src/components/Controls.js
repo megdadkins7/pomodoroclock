@@ -13,14 +13,14 @@ const StyledControls = styled.div`
   }
 `;
 
-function Controls({ activeStatus, handleReset }) {
-  const [active, setActive] = activeStatus
+function Controls({ activeState, handleReset }) {
+  const [active, setActive] = activeState
   return (
     <StyledControls>
-      <button id='StartStop' onClick={() => setActive(!active)}>
+      <button onClick={() => setActive(!active)}>
         {active ? <span>&#10074;&#10074;</span> : <span>&#9658;</span>}
       </button>
-      <button id='Reset' onClick={handleReset}>
+      <button onClick={handleReset}>
         &#8635;
       </button>
     </StyledControls>

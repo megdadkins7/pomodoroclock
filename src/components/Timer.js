@@ -22,13 +22,13 @@ const StyledTimer = styled.div`
   }
 `;
 
-function Timer({ currentMode, currentTime }) {
-  const [mode] = currentMode
+function Timer({ currentStatus, currentTime }) {
+  const [status] = currentStatus
   const [time] = currentTime
   return (
     <StyledTimer>
-      <h2 id='TimerLabel'>{mode === 'session' ? 'Session' : 'Break'}</h2>
-      <h3 id='TimeLeft'>{moment(time).format('mm:ss')}</h3>
+      <h2>{status === 'session' ? 'Session' : 'Break'}</h2>
+      <h3>{moment(time).format('mm:ss')}</h3>
     </StyledTimer>
   )
 }

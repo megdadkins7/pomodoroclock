@@ -51,40 +51,41 @@ const StyledTimeApp = styled.div`
 `;
 
 function TimeApp() {
-  const [breakVal, setBreakVal] = useState(5)
-  const [sessionVal, setSessionVal] = useState(25)
-  const [mode, setMode] = useState('session')
-  const [time, setTime] = useState(sessionVal * 60 * 1000)
-  const [active, setActive] = useState(false)
+  const [breakValue, setBreakValue] = useState(5);
+  const [sessionValue, setSessionValue] = useState(25);
+  const [status, setStatus] = useState('session');
+  const [time, setTime] = useState(sessionValue * 60 * 1000);
+  const [active, setActive] = useState(false);
   const beep = useRef()
-  
+
   useInterval(() => setTime(time - 1000), active ? 1000 : null)
+
+  useEffect(() => {
+    setTime(sessionValue * 60 * 1000)
+  }, [sessionValue])
   
   useEffect(() => {
-    setTime(sessionVal * 60 * 1000)
-  }, [sessionVal])
-  
-  useEffect(() => {
-    if (time === 0 && mode === 'session') {
+    if (time === 0 && status === 'session') {
       beep.current.play()
-      setMode('break')
-      setTime(breakVal * 60 * 1000)
-    } else if (time === 0 && mode === 'break') {
+      setStatus('break')
+      setTime(breakValue * 60 * 1000)
+    } else if (time === 0 && status === 'break') {
       beep.current.play()
-      setMode('session')
-      setTime(sessionVal * 60 * 1000)
+      setStatus('session')
+      setTime(sessionValue * 60 * 1000)
     }
-  }, [time, breakVal, sessionVal, mode])
-  
+  }, [time, breakValue, sessionValue, status])
+
   const handleReset = () => {
     beep.current.pause()
     beep.current.currentTime = 0
     setActive(false)
-    setMode('session')
-    setBreakVal(5)
-    setSessionVal(25)
+    setStatus('session')
+    setBreakValue(5)
+    setSessionValue(25)
     setTime(25 * 60 * 1000)
   }
+
   return (
     <StyledTimeApp>
       <header>
@@ -93,16 +94,16 @@ function TimeApp() {
       <main>
         <div className='TimeWrapper'>
         <div className='TimeDisplay'>
-          <Timer currentMode={[mode, setMode]} currentTime={[time, setTime]} />
+          <Timer currentStatus={[status, setStatus]} currentTime={[time, setTime]} />
           <Controls
-            activeStatus={[active, setActive]}
+            activeState={[active, setActive]}
             handleReset={handleReset}
           />
         </div>
         </div>
         <div className='SetTimeWrapper'>
-          <SetTime type={'Break'} value={[breakVal, setBreakVal]} />
-          <SetTime type={'Session'} value={[sessionVal, setSessionVal]} />
+          <SetTime type={'Break'} value={[breakValue, setBreakValue]} />
+          <SetTime type={'Session'} value={[sessionValue, setSessionValue]} />
         </div>
       </main>
       <audio id='beep' src={alarm} ref={beep} />
