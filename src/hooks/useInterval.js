@@ -1,4 +1,4 @@
-// I didn't write this custom hook. I found it here: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+// Hook not written by me. Custom hook found here: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
 import { useEffect, useRef } from 'react'
 

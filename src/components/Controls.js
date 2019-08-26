@@ -2,13 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledControls = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: flex-end;
-  
+  justify-content: center;
+  align-items: center;
   button {
     font-size: 3rem;
-    display: block;
     border: none;
     background-color: transparent;
     color: #7067CF;

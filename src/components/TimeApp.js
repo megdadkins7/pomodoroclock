@@ -22,30 +22,20 @@ const StyledTimeApp = styled.div`
     color: #111D4A;
   }
   main {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 75vh;
   }
   .TimeWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .TimeDisplay {
     background-color: #F3F3F4;
-    width: 100%;
+    width: 400px;
+    height: 400px;
     padding: 1rem;
     box-shadow: 0 3px 6px #888888;
-  }
-  .TimeWrapper h2 {
-    text-align: left;
-    font-size: 2rem;
-    text-transform: uppercase;
-    color: #7067CF;
-  }
-  .TimeWrapper h3 {
-    text-align: center;
-    font-size: 7rem;
-    color: #111D4A;
-    font-weight: 400;
+    border-radius: 50%;
   }
   .SetTimeWrapper {
     margin: 1rem;
@@ -102,11 +92,13 @@ function TimeApp() {
       </header>
       <main>
         <div className='TimeWrapper'>
+        <div className='TimeDisplay'>
           <Timer currentMode={[mode, setMode]} currentTime={[time, setTime]} />
           <Controls
             activeStatus={[active, setActive]}
             handleReset={handleReset}
           />
+        </div>
         </div>
         <div className='SetTimeWrapper'>
           <SetTime type={'Break'} value={[breakVal, setBreakVal]} />
